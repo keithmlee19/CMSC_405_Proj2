@@ -42,7 +42,7 @@ public class MainScene extends GLJPanel implements GLEventListener, KeyListener 
     addKeyListener(this);
   }
 
-  // ----------------  Method to draw the polyhedrons  --------------
+  // ----------------  Method to draw the polyhedra  --------------
   public void drawPolyhedron(
       GL2 gl2, Polyhedron polyhedron, double ps, double xt, double yt, double zt) {
     if (polyhedron.faceColors == null) {
