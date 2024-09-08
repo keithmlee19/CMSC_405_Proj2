@@ -10,13 +10,13 @@ import com.jogamp.opengl.awt.*;
  */
 @SuppressWarnings("serial")
 public class MainScene extends GLJPanel implements GLEventListener, KeyListener {
-  private double rotateX = 15; // rotations of the shape about the axes
+  private double rotateX = 15; // default rotations of the shape about the axes
   private double rotateY = -15;
   private double rotateZ = 0;
-  private double translateX = 0; // transforms in each direction
+  private double translateX = 0; // default transforms in each direction
   private double translateY = 0;
   private double translateZ = 0;
-  private double scale = 0.9; // image scale
+  private double scale = 1; // default image scale
 
   /**
    * A main routine to create and show a window that contains a panel of type MainScene. The program
@@ -93,7 +93,10 @@ public class MainScene extends GLJPanel implements GLEventListener, KeyListener 
     Cube.drawCube(gl2);
     // draw polyhedrons
     drawPolyhedron(gl2, Polyhedron.icosahedron, 0.7, -3, 2, 1);
-    drawPolyhedron(gl2, Polyhedron.soccerBall, 0.9, 4, 3, 0);
+    drawPolyhedron(gl2, Polyhedron.soccerBall, 0.9, 3, 2, 0);
+    drawPolyhedron(gl2, Polyhedron.stellatedDodecahedron, 1, -3, -2, -1);
+    drawPolyhedron(gl2, Polyhedron.tetrahedron, 0.5, 0, -4, 0);
+    drawPolyhedron(gl2, Polyhedron.truncatedRhombicDodecahedron, 0.6, 4, -4, 0);
   } // end display()
 
   public void init(GLAutoDrawable drawable) {
@@ -124,13 +127,16 @@ public class MainScene extends GLJPanel implements GLEventListener, KeyListener 
     int key = evt.getKeyCode();
     if (key == KeyEvent.VK_LEFT) rotateY -= 15;
     else if (key == KeyEvent.VK_RIGHT) rotateY += 15;
-    else if (key == KeyEvent.VK_DOWN) rotateX += 15;
-    else if (key == KeyEvent.VK_UP) rotateX -= 15;
-    else if (key == KeyEvent.VK_PAGE_UP) rotateZ += 15;
-    else if (key == KeyEvent.VK_PAGE_DOWN) rotateZ -= 15;
-    else if (key == KeyEvent.VK_PLUS) scale += 0.1;
-    else if (key == KeyEvent.VK_MINUS) scale -= 0.1;
-    else if (key == KeyEvent.VK_HOME) rotateX = rotateY = rotateZ = 0;
+    else if (key == KeyEvent.VK_DOWN) rotateX -= 15;
+    else if (key == KeyEvent.VK_UP) rotateX += 15;
+    else if (key == KeyEvent.VK_PAGE_UP) scale += 0.1;
+    else if (key == KeyEvent.VK_PAGE_DOWN) scale -= 0.1;
+    else if (key == KeyEvent.VK_HOME) {
+      rotateX = 15;
+      rotateY = -15;
+      rotateZ = 0;
+      scale = 1;
+    }
     repaint();
   }
 
